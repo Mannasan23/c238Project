@@ -1,3 +1,4 @@
+#required libraries
 from flask.cli import FlaskGroup
 from app import create_app, db
 from flask import current_app
@@ -17,6 +18,7 @@ from app.models.editor.order_item import OrderItems
 
 cli = FlaskGroup(create_app=create_app)
 
+#user details, passwords, contact numbers
 user_json = [
 	{
 		"name": "John Doe",
@@ -110,6 +112,7 @@ user_json = [
 	}
 ]
 
+#product details
 product_json = [
 	{
 		"name": "Sergeant Rodog AI",
@@ -190,11 +193,13 @@ product_json = [
 	}
 ]
 
+#function used to reset the database
 def recreate_db():
 	db.drop_all()
 	db.create_all()
 	db.session.commit()
 
+#creating something new on the database
 def seeder():
 	for user in user_json:
 		Users.create(user.get("name"), user.get("email"), user.get("password"), user.get("contact"))

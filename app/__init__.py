@@ -1,3 +1,4 @@
+#libraries required
 import os
 from flask import Flask, jsonify
 from flask_cors import CORS
@@ -12,6 +13,7 @@ db = SQLAlchemy()
 
 migrate = Migrate()
 
+#create an application
 def create_app(script_info=None):
 
     # instantiate the app

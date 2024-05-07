@@ -1,3 +1,4 @@
+#libraries required
 from flask import Blueprint, jsonify, request, session, redirect, url_for, send_file
 from app.models.users import Users
 from app.models.address import Address
@@ -11,6 +12,7 @@ api = Blueprint('api', __name__, url_prefix="/api")
 
 UPLOAD_FOLDER = os.path.abspath("app/static/attachments")
 
+#login API is called to give email and password for login
 @api.route('/login', methods=['POST'])
 def login():
     try:
@@ -43,6 +45,7 @@ def login():
             "message": str(e)
         }), 400
 
+#this API is used to logout when the button is pressed
 @api.route("/logout", methods=["POST"])
 def logout():
     try:
@@ -59,6 +62,7 @@ def logout():
             "message": str(e)
         }), 400
 
+#sends a request to add an address
 @api.route("/add-address", methods=["POST"])
 def add_address():
     try:
@@ -82,6 +86,7 @@ def add_address():
             "message": str(e)
         }), 400
 
+#allows the user to order/buy something
 @api.route("/create-order", methods=["POST"])
 def create_order():
     try:
@@ -103,6 +108,7 @@ def create_order():
             "message": str(e)
         }), 400
 
+#uses the API to file a complaint/raise a query
 @api.route("/submit-help", methods=["POST"])
 def submit_help():
     title = request.form.get("title")
@@ -121,10 +127,12 @@ def submit_help():
             }, 201
         )
 
+#downloads attachment for frontpage
 @api.route("/download/<path:filename>")
 def download(filename):
     return send_file(os.path.join(UPLOAD_FOLDER, filename), as_attachment=True)
 
+#allows access to orders
 @api.route("/search-order")
 def search_order():
     order_id = request.args.get("order_id")
@@ -142,6 +150,7 @@ def search_order():
         "orders": orders
     }), 200
 
+#outcome when there is no result
 @api.route("/execute", methods=["POST"])
 def execute():
     try:
@@ -169,6 +178,7 @@ def execute():
             "message": str(e)
         }), 400
 
+#list of customers
 @api.route("/get-customer")
 def get_customer():
     try:

@@ -1,3 +1,4 @@
+#libraries required
 from flask import Blueprint, render_template, session, redirect, url_for, request, jsonify
 from app.models.products import Products
 from app.models.address import Address
@@ -9,6 +10,7 @@ from flask_cors import cross_origin
 
 views = Blueprint('views', __name__, url_prefix="/")
 
+#login page
 @views.route('/')
 @cross_origin()
 def login():
@@ -20,6 +22,7 @@ def login():
             "status": "error"
         }), 400
 
+#dashboard
 @views.route('/dashboard')
 @cross_origin()
 def dashboard():
@@ -33,6 +36,7 @@ def dashboard():
             "status": "error"
         }), 400
 
+#profile page
 @views.route('/profile')
 @cross_origin()
 def profile():
@@ -53,6 +57,7 @@ def profile():
             "status": "error"
         }), 400
 
+#order page
 @views.route('/order')
 @cross_origin()
 def order():
@@ -74,6 +79,7 @@ def order():
             "status": "error"
         }), 400
 
+#help page
 @views.route("/help")
 @cross_origin()
 def help_page():
@@ -85,6 +91,7 @@ def help_page():
             "status": "error"
         }), 400
 
+#editor page
 @views.route("/editor")
 @cross_origin()
 def editor():
